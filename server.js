@@ -31,3 +31,14 @@ app.listen(3000, () => {
 app.get("/posts", (req, res) => {
   res.status(200).json(posts);
 });
+
+function getPostById(id) {
+  return posts.findIndex((post) => {
+    return post.id === Number(id);
+  });
+}
+
+app.get("/posts/:id", (req, res) => {
+  const index = getPostById(req.params.id);
+  res.status(200).json(posts[index]);
+});
