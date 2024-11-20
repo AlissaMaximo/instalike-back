@@ -1,4 +1,7 @@
 import express from "express";
+import conectarAoBanco from "./src/config/dbConfig.js";
+
+await conectarAoBanco(process.env.CONNECTION_STRING);
 
 const posts = [
   {
