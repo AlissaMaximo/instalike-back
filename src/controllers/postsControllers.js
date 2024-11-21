@@ -1,3 +1,5 @@
+import getAllPosts from "../models/postsModel.js";
+
 export async function listPosts(req, res) {
   // Calls the function to get all posts
   const posts = await getAllPosts();
