@@ -20,3 +20,17 @@ export async function publishNewPost(req, res) {
     res.status(500).json({ Error: "Request failed" });
   }
 }
+
+export async function uploadImage(req, res) {
+  const newPost = req.body;
+  try {
+    // Calls the function from postsModel.js to create a post
+    const createdPost = await createPost(newPost);
+    // Sends an HTTP answer with status 200 (OK) and the created post in JSON format
+    res.status(200).json(createdPost);
+  } catch (error) {
+    // When fails, shows internal server error and shows in the console the error message.
+    console.error(erro.message);
+    res.status(500).json({ Error: "Request failed" });
+  }
+}
