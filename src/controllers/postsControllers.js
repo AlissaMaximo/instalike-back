@@ -22,7 +22,12 @@ export async function publishNewPost(req, res) {
 }
 
 export async function uploadImage(req, res) {
-  const newPost = req.body;
+  const newPost = {
+    description: "",
+    imgUrl: req.file.originalName,
+    alt: "",
+  };
+
   try {
     // Calls the function from postsModel.js to create a post
     const createdPost = await createPost(newPost);
