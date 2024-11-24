@@ -6,7 +6,7 @@ routes(app);
 
 // Starts the server in port 3000 and shows a message in the console
 app.listen(3000, () => {
-  console.log("Servidor escutando...");
+  console.log("Server listening...");
 });
 
 function getPostById(id) {

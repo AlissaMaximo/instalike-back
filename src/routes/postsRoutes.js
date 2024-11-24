@@ -6,6 +6,12 @@ import {
   updateNewPost,
 } from "../controllers/postsControllers.js";
 import multer from "multer";
+import cors from "cors";
+
+const corsOptions = {
+  origin: "http://localhost:8000",
+  optionsSuccessStatus: 200,
+};
 
 // For Linux or Mac this is the code for multer to manipulate images
 const upload = multer({ dest: "./uploads" });
@@ -13,6 +19,7 @@ const upload = multer({ dest: "./uploads" });
 const routes = (app) => {
   // Allows the server to interpret requests with bodies in JSON format
   app.use(express.json());
+  app.use(cors(corsOptions));
   // Route to get (read) all posts
   app.get("/posts", listPosts);
   // Route to create a post

@@ -1,3 +1,5 @@
+// Source: https://github.com/guilhermeonrails/5-Vb8nXmJ5Q7kZ/blob/main/src/services/geminiService.js
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -15,8 +17,12 @@ export default async function generateDescriptionWithGemini(imageBuffer) {
     };
     const res = await model.generateContent([prompt, image]);
     return res.response.text() || "Alt-text unavailable.";
-  } catch (erro) {
-    console.error("Error when trying to obtain alt-text:", erro.message, erro);
+  } catch (error) {
+    console.error(
+      "Error when trying to obtain alt-text:",
+      error.message,
+      error
+    );
     throw new Error("Erro when trying to obtain alt-text from Gemini.");
   }
 }
