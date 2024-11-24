@@ -1,4 +1,4 @@
-import { getAllPosts, createPost } from "../models/postsModel.js";
+import { getAllPosts, createPost, updatePost } from "../models/postsModel.js";
 import fs from "fs";
 
 export async function listPosts(req, res) {
@@ -17,7 +17,7 @@ export async function publishNewPost(req, res) {
     res.status(200).json(createdPost);
   } catch (error) {
     // When fails, shows internal server error and shows in the console the error message.
-    console.error(erro.message);
+    console.error(error.message);
     res.status(500).json({ Error: "Request failed" });
   }
 }
@@ -41,6 +41,26 @@ export async function uploadImage(req, res) {
   } catch (error) {
     // When fails, shows internal server error and shows in the console the error message.
     console.error(erro.message);
+    res.status(500).json({ Error: "Request failed" });
+  }
+}
+
+export async function updateNewPost(req, res) {
+  const id = req.params.id;
+  const urlImg = `http://localhost:3000/${id}.png`;
+  const post = {
+    imgUrl: urlImg,
+    description: req.body.description,
+    alt: req.body.alt,
+  };
+  try {
+    // Calls the function from postsModel.js to create a post
+    const updatedPost = await updatePost(id, post);
+    // Sends an HTTP answer with status 200 (OK) and the created post in JSON format
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    // When fails, shows internal server error and shows in the console the error message.
+    console.error(error.message);
     res.status(500).json({ Error: "Request failed" });
   }
 }
